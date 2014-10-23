@@ -1059,7 +1059,7 @@ inline float& Matrix::operator()(const int ax, const int ay) const
   #ifdef _DEBUG
     if (ax >= ivWidth || ay >= ivHeight || ax < 0 || ay < 0){
       std::cerr << "Exception EMatrixRangeOverflow: x = " << ax << ", y = " << ay << std::endl;
-      return 0;
+      throw std::runtime_error("Exception EMatrixRangeOverflow");
     }
   #endif
   return ivData[ivWidth*ay+ax];

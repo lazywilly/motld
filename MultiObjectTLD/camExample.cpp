@@ -57,7 +57,8 @@ int ivWidth, ivHeight;
 CvCapture* capture;
 ObjectBox mouseBox = {0,0,0,0,0};
 int mouseMode = MOUSE_MODE_IDLE;
-int drawMode = 255;
+int drawMode = 0;
+//int drawMode = 255;
 bool learningEnabled = true, save = false, load = false, reset = false;
 
 void Init(int argc, char *argv[]);
@@ -119,7 +120,7 @@ void* Run(void*)
   Matrix maRed;
   Matrix maGreen;
   Matrix maBlue;
-  unsigned char img[size*3];
+  unsigned char* img = new unsigned char[size*3];
   #ifdef FORCE_RESIZING
   CvSize wsize = {ivWidth, ivHeight};
   IplImage* frame = cvCreateImage(wsize, IPL_DEPTH_8U, 3);
@@ -174,7 +175,7 @@ void* Run(void*)
       save = false;
     }
   }
-  //delete[] img;
+  delete[] img;
   cvReleaseCapture(&capture);
   return 0;
 }
